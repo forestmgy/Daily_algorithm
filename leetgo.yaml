@@ -1,0 +1,11 @@
+# This is the leetgo project level config, global config is at /Users/mac/.config/leetgo/config.yaml
+# For more details, please refer to https://github.com/j178/leetgo
+language: zh
+code:
+  lang: go
+leetcode:
+  site: https://leetcode.cn
+  credentials:
+    from: browser
+#editor:
+#  use: none

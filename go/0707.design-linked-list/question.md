@@ -47,3 +47,6 @@ myLinkedList.get(1);              // 返回 3
 - `0 <= index, val <= 1000`
 - 请不要使用内置的 LinkedList 库。
 - 调用 `get`、 `addAtHead`、 `addAtTail`、 `addAtIndex` 和 `deleteAtIndex` 的次数不超过 `2000` 。
+
+## 解答
+没什么可说的，就是要考虑各种情况

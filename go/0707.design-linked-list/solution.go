@@ -1,6 +1,6 @@
 // Created by maguangyu at 2023/07/13 10:26
 // leetgo: 1.3.3
-// https://leetcode.cn/problems/design-linked-list/
+// https://leetcode.cn/problems/design-linked-MyLinkedList/
 
 package main
 
@@ -14,34 +14,88 @@ import (
 
 // @lc code=begin
 
-type MyLinkedList struct {
+type MyNode struct {
+	val  int
+	next *MyNode
+}
 
+type MyLinkedList struct {
+	fakeHead *MyNode
+	size     int
 }
 
 func Constructor() MyLinkedList {
-
-	return MyLinkedList{}
+	return MyLinkedList{fakeHead: new(MyNode), size: 0}
 }
 
 func (m *MyLinkedList) Get(index int) (ans int) {
+	if m.fakeHead.next == nil || index < 0 || index > m.size || m.size == 0 {
+		return -1
+	}
+	tmp := m.fakeHead.next
+	for i := 0; i < index; i++ {
+		if tmp.next == nil {
+			return -1
+		}
+		tmp = tmp.next
+	}
 
-	return
+	return tmp.val
 }
 
-func (m *MyLinkedList) AddAtHead(val int)  {
-
+func (m *MyLinkedList) AddAtHead(val int) {
+	tmp := &MyNode{val: val}
+	tmp.next = m.fakeHead.next
+	m.fakeHead.next = tmp
+	m.size++
 }
 
-func (m *MyLinkedList) AddAtTail(val int)  {
-
+func (m *MyLinkedList) AddAtTail(val int) {
+	cur := m.fakeHead
+	for cur.next != nil {
+		cur = cur.next
+	}
+	tail := MyNode{}
+	tail.val = val
+	cur.next = &tail
+	m.size++
 }
 
-func (m *MyLinkedList) AddAtIndex(index int, val int)  {
-
+func (m *MyLinkedList) AddAtIndex(index int, val int) {
+	if index > m.size {
+		return
+	} else if index < 0 {
+		index = 0
+	}
+	cur := m.fakeHead
+	for i := 0; i < index; i++ {
+		cur = cur.next
+	}
+	tmp := MyNode{}
+	tmp.val = val
+	tmp.next = cur.next
+	cur.next = &tmp
+	m.size++
 }
 
-func (m *MyLinkedList) DeleteAtIndex(index int)  {
-
+func (m *MyLinkedList) DeleteAtIndex(index int) {
+	if index >= m.size {
+		return
+	}
+	cur := m.fakeHead.next
+	if index == 0 {
+		m.fakeHead.next = m.fakeHead.next.next
+		return
+	}
+	for i := 0; i < index-1; i++ {
+		cur = cur.next
+	}
+	if index == m.size-1 {
+		cur.next = nil
+		return
+	}
+	cur.next = cur.next.next
+	m.size--
 }
 
 // @lc code=end

@@ -1,4 +1,4 @@
-// Created by maguangyu at 2023/07/13 14:43
+// Created by maguangyu at 2023/08/12 13:54
 // leetgo: 1.3.3
 // https://leetcode.cn/problems/reverse-linked-list/
 
@@ -15,12 +15,18 @@ import (
 // @lc code=begin
 
 func reverseList(head *ListNode) (ans *ListNode) {
+	if head == nil {
+		return nil
+	}
 	ans = new(ListNode)
-	for head != nil {
-		tmp := &ListNode{Val: head.Val}
-		tmp.Next = ans.Next
+	cur := head
+	for cur != nil {
+		//创建一个零时节点存储当前节点的值
+		tmp := &ListNode{Val: cur.Val}
+		next := ans.Next
 		ans.Next = tmp
-		head = head.Next
+		tmp.Next = next
+		cur = cur.Next
 	}
 	return ans.Next
 }

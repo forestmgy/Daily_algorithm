@@ -1,4 +1,4 @@
-// Created by maguangyu at 2023/07/11 17:15
+// Created by maguangyu at 2023/08/12 13:17
 // leetgo: 1.3.3
 // https://leetcode.cn/problems/remove-linked-list-elements/
 
@@ -7,26 +7,31 @@ package main
 import (
 	"bufio"
 	"fmt"
-	. "github.com/j178/leetgo/testutils/go"
 	"os"
+
+	. "github.com/j178/leetgo/testutils/go"
 )
 
 // @lc code=begin
 
 func removeElements(head *ListNode, val int) (ans *ListNode) {
 	if head == nil {
-		return nil
+		return
 	}
-	ans = &ListNode{}
+	ans = new(ListNode)
 	ans.Next = head
-	var current *ListNode
-	current = ans
-	for current != nil && current.Next != nil {
-		if current.Next.Val == val {
-			current.Next = current.Next.Next
-		} else {
-			current = current.Next
+	cur := ans
+	for cur != nil && cur.Next != nil {
+		if cur.Next.Val == val {
+			if cur.Next.Next != nil {
+				cur.Next = cur.Next.Next
+			} else {
+				cur.Next = nil
+			}
+			continue
 		}
+		cur = cur.Next
+
 	}
 	return ans.Next
 }

@@ -1,4 +1,4 @@
-// Created by maguangyu at 2023/07/13 18:50
+// Created by maguangyu at 2023/08/12 14:13
 // leetgo: 1.3.3
 // https://leetcode.cn/problems/swap-nodes-in-pairs/
 
@@ -20,15 +20,22 @@ func swapPairs(head *ListNode) (ans *ListNode) {
 	}
 	ans = new(ListNode)
 	ans.Next = head
-	pre := ans
+	slow, fast := head, head.Next
+	cur := ans
+	for fast != nil {
+		slow.Next = fast.Next
+		fast.Next = slow
+		cur.Next = fast
+		cur = slow
+		if slow.Next == nil {
+			break
+		}
+		slow = slow.Next
+		if slow.Next == nil {
+			break
+		}
+		fast = slow.Next
 
-	for head != nil && head.Next != nil {
-		pre.Next = head.Next
-		next := head.Next.Next
-		head.Next.Next = head
-		head.Next = next
-		pre = head
-		head = next
 	}
 	return ans.Next
 }

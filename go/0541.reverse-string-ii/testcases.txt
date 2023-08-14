@@ -1,0 +1,11 @@
+input:
+"abcdefg"
+2
+output:
+"bacdfeg"
+
+input:
+"abcd"
+2
+output:
+"bacd"

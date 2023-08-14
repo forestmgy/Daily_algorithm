@@ -1,0 +1,11 @@
+input:
+"anagram"
+"nagaram"
+output:
+true
+
+input:
+"rat"
+"car"
+output:
+false

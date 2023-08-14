@@ -1,0 +1,4 @@
+input:
+"We are happy."
+output:
+"We%20are%20happy."
